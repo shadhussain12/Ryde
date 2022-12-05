@@ -6,9 +6,12 @@ import moment from "moment";
 
 function App() {
   const [data, setData] = useState(null);
+  // eslint-disable-next-line
   const [error, setError] = useState(true);
+  // eslint-disable-next-line
   const [loading, setLoading] = useState(null);
 
+  // fetches api endpoint data using axios
   useEffect(() => {
     const getData = async () => {
       try {
@@ -28,6 +31,8 @@ function App() {
     getData();
   }, []);
 
+  // adjusts dates to more readable format (mm/dd)
+  // uses the moment library
   const CustomizedAxisTick = ({ x, y, payload }) => {
     const dateTip = moment(payload.value)
       .format("ll")
@@ -40,6 +45,7 @@ function App() {
     );
   }
 
+  // function to customize styling and formatting of the tooltip
   const CustomTooltip = ({ active, payload, label }) => {
     const dateTip = moment(label)
       .format("llll")
@@ -58,6 +64,7 @@ function App() {
     return null;
   };
 
+  // allows user to select range and filter data using a slider
   const xAxisTickFormatter = (timestamp_measured) => {
     return moment(timestamp_measured)
       .format("ll")
